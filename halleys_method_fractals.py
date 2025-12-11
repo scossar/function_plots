@@ -212,15 +212,16 @@ def halley_convergence_fractal(
 
 # the verbose/inefficient form is to reduce errors when I edit these
 def f(z):
-    return (0.2 * z**13) + (9 * z**np.e) - 20.002
+    # 0.2z^3 + 0.9z^2 - 0.002
+    return (0.2 * z**3) + (0.9 * z**2) - 0.002
 
 
 def df(z):
-    return (13 * 0.2 * z**12) + (np.e * 9 * z ** (np.e - 1))
+    return (3 * 0.2 * z**2) + (2 * 0.9 * z**1)
 
 
 def ddf(z):
-    return (13 * 0.2 * 12 * z**11) + ((np.e - 1) * np.e * 9 * z ** (np.e - 2))
+    return (2 * 3 * 0.2 * z**1) + (1 * 2 * 0.9 * z**0)
 
 
 # def f(z):
@@ -243,10 +244,10 @@ result, xs, ys = halley_convergence_fractal(
     ddf,
     width=1024,
     height=1024,
-    xmin=-50000,
-    xmax=-25000,
-    ymin=-35000,
-    ymax=-10000,
+    xmin=-170,
+    xmax=170,
+    ymin=-170,
+    ymax=170,
     max_iter=400,
 )
 
@@ -257,11 +258,11 @@ plt.imshow(
     extent=(xs[0], xs[-1], ys[0], ys[-1]),
     # cmap="hot",
     # cmap="tab20c",
-    cmap="Set1",
+    cmap="YlGn",
     origin="lower",
     interpolation="bilinear",
 )
-plt.title("Halley's Method: f(z) = unknown")
+plt.title("Halley's Method: f(z) = 0.2z^3 + 0.9z^2 - 0.002")
 plt.xlabel("Real")
 plt.ylabel("Imaginary")
 plt.colorbar(label="Iterations")
